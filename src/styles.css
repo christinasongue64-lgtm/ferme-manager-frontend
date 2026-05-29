@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f4f6f4;
+  color: #212121;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #b0bec5; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #78909c; }
+
+/* Bootstrap overrides */
+.btn-success { background-color: #2d5a27; border-color: #2d5a27; }
+.btn-success:hover { background-color: #1a3d16; border-color: #1a3d16; }
+.btn-outline-success { color: #2d5a27; border-color: #2d5a27; }
+.btn-outline-success:hover { background-color: #2d5a27; }
+
+.form-control:focus, .form-select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.2);
+}
+
+.table > :not(caption) > * > * {
+  padding: 10px 16px;
+}
+
+.badge { font-weight: 500; font-size: 0.75rem; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .kpi-card, .stock-card {
+  animation: fadeIn 0.3s ease-out;
+}
