@@ -1,6 +1,9 @@
 # Ferme Manager - Frontend
 
-Interface Angular pour la gestion d'élevage.
+Interface de gestion d'élevage développée dans le cadre du projet de fin d'année à l'Institut Universitaire Saint Jean 2025-2026.
+
+## Description
+Ferme Manager est une application web permettant de gérer efficacement un élevage. Elle offre une interface intuitive pour suivre les animaux, leur santé, les stocks, les ventes et les finances de la ferme.
 
 ## Technologies
 - Angular 17
@@ -18,12 +21,12 @@ npm start
 - **Application** : http://localhost:4200
 
 ## Modules
-- **Dashboard** : Tableau de bord
-- **Animaux** : Gestion des animaux
-- **Santé** : Suivi sanitaire
-- **Stock** : Gestion du stock
-- **Ventes** : Gestion des ventes
-- **Finances** : Gestion financière
+- **Dashboard** : Vue d'ensemble de la ferme
+- **Animaux** : Gestion et suivi des animaux
+- **Santé** : Suivi sanitaire et vaccinations
+- **Stock** : Gestion des stocks et mouvements
+- **Ventes** : Enregistrement et suivi des ventes
+- **Finances** : Gestion des dépenses et revenus
 
 ## Configuration
 Modifier l'URL du backend dans `src/environments/environment.ts` :
