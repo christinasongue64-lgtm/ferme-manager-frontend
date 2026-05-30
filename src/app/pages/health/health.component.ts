@@ -245,7 +245,7 @@ export class HealthComponent implements OnInit {
   }
 
   loadAnimals(): void {
-    this.animalService.getAll({ status: 'alive' }).subscribe(data => this.animals = data);
+    this.animalService.getAll({}).subscribe(data => this.animals = data);
   }
 
   onSearch(e: Event): void { this.filters.search = (e.target as HTMLInputElement).value; this.load(); }

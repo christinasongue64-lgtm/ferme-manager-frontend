@@ -37,8 +37,8 @@ import { Animal } from '../../models/models';
             <select class="form-select" (change)="onFilterStatus($event)">
               <option value="">Tous les statuts</option>
               <option value="Vivant">Vivant</option>
-              <option value="sold">Vendu</option>
-              <option value="dead">Décédé</option>
+              <option value="Vendu">Vendu</option>
+              <option value="Decede">Décédé</option>
             </select>
           </div>
         </div>
@@ -158,9 +158,9 @@ import { Animal } from '../../models/models';
                 <label class="form-label">Statut</label>
                 <select class="form-select" formControlName="status">
                   <option value="Vivant">Vivant</option>
-                  <option value="sold">Vendu</option>
-                  <option value="dead">Décédé</option>
-                  <option value="transferred">Transféré</option>
+                  <option value="Vendu">Vendu</option>
+                  <option value="Decede">Décédé</option>
+                  <option value="Transfere">Transféré</option>  
                 </select>
               </div>
               <div class="col-12">
@@ -323,7 +323,7 @@ export class AnimalsComponent implements OnInit {
 
   statusClass(status: string): string {
     const m: Record<string, string> = {
-      Vivant: 'bg-success', sold: 'bg-info', dead: 'bg-secondary', transferred: 'bg-warning text-dark'
+      Vivant: 'bg-success', Vendu: 'bg-info', Decede: 'bg-secondary', Transfere: 'bg-warning text-dark'
     };
     return m[status] || 'bg-secondary';
   }
