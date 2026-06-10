@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 import { User } from './models/models';
@@ -9,7 +10,7 @@ import { User } from './models/models';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
   template: `
-    <div class="app-wrapper" *ngIf="isLoggedIn; else loginLayout">
+    <div class="app-wrapper" *ngIf="isLoggedIn && !isLoginPage; else loginLayout">
       <!-- Sidebar -->
       <nav class="sidebar" [class.collapsed]="sidebarCollapsed">
         <div class="sidebar-brand">
@@ -52,6 +53,12 @@ import { User } from './models/models';
             <a routerLink="/finance" routerLinkActive="active" class="nav-link">
               <i class="bi bi-cash-coin"></i>
               <span *ngIf="!sidebarCollapsed">Finances</span>
+            </a>
+          </li>
+          <li *ngIf="currentUser?.role === 'admin'">
+            <a routerLink="/users" routerLinkActive="active" class="nav-link">
+              <i class="bi bi-people"></i>
+              <span *ngIf="!sidebarCollapsed">Utilisateurs</span>
             </a>
           </li>
         </ul>
@@ -155,18 +162,35 @@ export class AppComponent implements OnInit {
   sidebarCollapsed = false;
   currentUser: User | null = null;
   today = new Date();
+  isLoginPage = true;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      this.isLoggedIn = !!user;
-    });
+  // Écoute les changements de route EN PREMIER
+  this.router.events.pipe(
+    filter(e => e instanceof NavigationEnd)
+  ).subscribe((e: any) => {
+    const url = e.urlAfterRedirects || e.url;
+    this.isLoginPage = url === '/login' || url === '/register';
     this.isLoggedIn = this.authService.isLoggedIn();
     this.currentUser = this.authService.currentUser;
-  }
+  });
 
+  // Puis écoute les changements d'utilisateur
+  this.authService.currentUser$.subscribe(user => {
+    this.currentUser = user;
+    this.isLoggedIn = !!user;
+  });
+
+  // Vérifie l'état au démarrage
+  const currentUrl = this.router.url;
+  this.isLoginPage = currentUrl === '/login' || 
+                     currentUrl === '/register' || 
+                     currentUrl === '/';
+  this.isLoggedIn = this.authService.isLoggedIn();
+  this.currentUser = this.authService.currentUser;
+}
   toggleSidebar(): void {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }

@@ -220,7 +220,7 @@ export class SalesComponent implements OnInit {
   }
 
   loadAnimals(): void {
-    this.animalService.getAll({ status: 'alive' }).subscribe(data => this.animals = data);
+    this.animalService.getAll({}).subscribe(data => this.animals = data);
   }
 
   get totalRevenue(): number {
