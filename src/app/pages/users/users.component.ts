@@ -277,6 +277,8 @@ export class UsersComponent implements OnInit {
     this.saving = true;
     this.serverErrors = null;
 
+    console.log("erreur server ")
+
     if (this.editMode && this.editId) {
       const { password, password2, ...data } = this.form.value;
       this.http.patch<User>(
