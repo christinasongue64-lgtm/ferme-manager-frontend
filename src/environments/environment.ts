@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://ferme-manager-backend.onrender.com/api'
 };
